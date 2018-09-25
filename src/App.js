@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Radium, {StyleRoot} from "radium";
 import './App.css';
 import Person from './Person';
 
@@ -8,7 +9,7 @@ class App extends Component {
     persons: [
         {id: 'w3rw', name: 'Ivan', age: 34},
         {id: 'etg4e', name: 'Petr', age: 23},
-        {id: 'vmbj', name: 'Sidor', age: 37}
+        {id: 'vmbj', name: 'Egor', age: 37}
     ],
     showPersons: false
   };
@@ -45,6 +46,17 @@ class App extends Component {
   render() {
 
     let persons = null;
+    const style = {
+      backgroundColor: 'green',
+      color: 'white',
+      borderRadius: '4px',
+      border: '1px solid black',
+      padding: '16px',
+      ':hover': {
+        background: 'lightgreen',
+        color: 'yellow'
+      }
+    };
 
     if(this.state.showPersons){
       persons = (
@@ -59,17 +71,36 @@ class App extends Component {
                 />
               })}
           </div>
-      )
+      );
+
+      style.backgroundColor = 'red';
+      style[':hover'] = {
+        background: 'salmon',
+        color: 'navy'
+      }
+    }
+
+    let classes = [];
+    if(this.state.persons.length <= 2){
+      classes.push('red');
+    }
+    if(this.state.persons.length <= 1){
+      classes.push('bold');
     }
 
     return (
-      <div className="App">
-        <h1>Learning React 16</h1>
-        <button onClick={this.togglePersonsHandler}>Toggle Persons</button>
+      <StyleRoot>
+        <div className="App">
+          <h1>Learning React 16</h1>
+          <p className={classes.join(' ')}>
+            Lorem ipsum
+          </p>
+          <button style={style} onClick={this.togglePersonsHandler}>Toggle Persons</button>
           {persons}
-      </div>
+        </div>
+      </StyleRoot>
     );
   }
 }
 
-export default App;
+export default Radium(App);
