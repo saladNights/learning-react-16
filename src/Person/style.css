@@ -4,3 +4,9 @@
     border: 1px solid #eee;
     padding: 10px;
 }
+
+@media (max-width: 500px){
+    .Person{
+        width: 90%;
+    }
+}
