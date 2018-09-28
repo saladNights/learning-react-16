@@ -6,6 +6,7 @@ class Persons extends Component{
         return (
             this.props.persons.map((person, index) => {
                 return <Person
+                    focusedInput={index}
                     name={person.name}
                     age={person.age}
                     click={() => this.props.clicked(index)}
